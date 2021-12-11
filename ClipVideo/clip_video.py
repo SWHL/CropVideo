@@ -1,8 +1,8 @@
 # !/usr/bin/env python
 # -*- encoding: utf-8 -*-
-# @File: main.py
-# @Time: 2021/06/27 08:53:22
-# @Author: Max
+# @File: clip_video.py
+# @Author: SWHL
+# @Contact: liekkaskono@163.com
 import argparse
 from pathlib import Path
 import sys
@@ -19,22 +19,29 @@ class ClipVideo(object):
     def __init__(self) -> None:
         pass
 
-    def __call__(self, clip_info_path):
-        print('Reading the clip info')
-        video_path, clip_info_list = self.read_clip_info(clip_info_path)
+    def __call__(self,
+                 clip_info_str=None,
+                 clip_info_path=None,
+                 save_dir=None):
+        if clip_info_str is not None:
+            clip_info_list = [clip_info_str]
+        else:
+            print('Reading the clip info')
+            video_path, clip_info_list = self.read_clip_info(clip_info_path)
 
-        save_clip_dir = Path('video_clip') / Path(video_path).stem
-        mkdir(save_clip_dir)
+        if save_dir is None:
+            save_dir = Path('video_clip') / Path(video_path).stem
+            mkdir(save_dir)
 
         with editor.VideoFileClip(video_path) as cliper:
             for one_clip_info in tqdm(clip_info_list):
                 clip_video_name, clip_start, clip_end = one_clip_info
 
-                save_clip_path = str(save_clip_dir / clip_video_name)
+                save_clip_path = str(save_dir / clip_video_name)
                 self.save_clip_video(cliper, save_clip_path,
                                      clip_start, clip_end)
         print('The cropped video has been saved '
-             f'under video_clip/{Path(video_path).stem}')
+             f'under {save_dir}/{Path(video_path).stem}')
 
     @staticmethod
     def read_clip_info(txt_path):
@@ -61,19 +68,37 @@ class ClipVideo(object):
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--clip_info_str', type=str, default=None)
+    parser.add_argument('--clip_info_path', type=str,
+                        default='clip_info.txt',
+                        help='Clip Infor')
+    parser.add_argument('--save_dir', type=str, default='video_clip')
+    args = parser.parse_args()
+
     clip_videoer = ClipVideo()
 
-    clip_info_path = sys.argv[1]
-    if Path(clip_info_path).is_file():
-        clip_videoer(clip_info_path)
+    if args.clip_info_str is None:
+        if args.clip_info_path is None:
+            raise ValueError(f'clip_info_str or clip_info_path must have')
+        else:
+            if args.clip_info_path.is_file():
+                clip_videoer(clip_info_path=args.clip_info_path)
+            else:
+                print(f'{args.clip_info_path} is not a file!')
+                sys.exit(2)
     else:
-        print(f'{clip_info_path} is not a file!')
-        sys.exit(2)
+        clip_videoer(clip_info_str=args.clip_info_str,
+                     save_dir=args.save_dir)
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('clip_info_path', type=str, default='clip_info.txt')
+    parser.add_argument('--clip_info_str', type=str, default=None)
+    parser.add_argument('--clip_info_path', type=str,
+                        default='clip_info.txt',
+                        help='Clip Infor')
+    parser.add_argument('--save_dir', type=str, default='video_clip')
     args = parser.parse_args()
 
     clip_videoer = ClipVideo()

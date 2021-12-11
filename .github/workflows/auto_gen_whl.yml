@@ -1,0 +1,42 @@
+name: Auto gen whl
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set SSH Environment
+        env:
+          DEPLOY_KEYS_PADDLE: ${{ secrets.DEPLOY_KEYS }}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$DEPLOY_KEYS_PADDLE" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          chmod 700 ~/.ssh && chmod 600 ~/.ssh/*
+
+      - name: Run setup.py
+        run: |
+          python setup.py bdist_wheel
+          rm -r build
+          rm -r *.egg-info
+          mv dist/*.whl whl/
+          rm -r dist
+
+      - name: Submit code to repository
+        run: |
+         git config --global user.name "SWHL"
+         git config --global user.email "liekkaskono@163.com"
+
+         git add .
+         git commit -m 'Successfully gen whl'
+         git push origin main

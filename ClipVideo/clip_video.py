@@ -24,7 +24,10 @@ class ClipVideo(object):
                  clip_info_path=None,
                  save_dir=None):
         if clip_info_str is not None:
-            clip_info_list = [clip_info_str]
+            print(clip_info_str)
+            split_part = clip_info_str.split(',')
+            print(split_part)
+            video_path, clip_info_list = split_part[0], [split_part[1:]]
         else:
             print('Reading the clip info')
             video_path, clip_info_list = self.read_clip_info(clip_info_path)
@@ -33,6 +36,7 @@ class ClipVideo(object):
             save_dir = Path('video_clip') / Path(video_path).stem
             mkdir(save_dir)
 
+        print(video_path)
         with editor.VideoFileClip(video_path) as cliper:
             for one_clip_info in tqdm(clip_info_list):
                 clip_video_name, clip_start, clip_end = one_clip_info
@@ -73,7 +77,7 @@ def main():
     parser.add_argument('--clip_info_path', type=str,
                         default='clip_info.txt',
                         help='Clip Infor')
-    parser.add_argument('--save_dir', type=str, default='video_clip')
+    parser.add_argument('--save_dir', type=str, default=Path('video_clip'))
     args = parser.parse_args()
 
     clip_videoer = ClipVideo()
@@ -82,7 +86,7 @@ def main():
         if args.clip_info_path is None:
             raise ValueError(f'clip_info_str or clip_info_path must have')
         else:
-            if args.clip_info_path.is_file():
+            if Path(args.clip_info_path).is_file():
                 clip_videoer(clip_info_path=args.clip_info_path)
             else:
                 print(f'{args.clip_info_path} is not a file!')
@@ -98,7 +102,7 @@ if __name__ == '__main__':
     parser.add_argument('--clip_info_path', type=str,
                         default='clip_info.txt',
                         help='Clip Infor')
-    parser.add_argument('--save_dir', type=str, default='video_clip')
+    parser.add_argument('--save_dir', type=str, default=Path('video_clip'))
     args = parser.parse_args()
 
     clip_videoer = ClipVideo()

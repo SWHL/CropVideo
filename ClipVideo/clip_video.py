@@ -24,9 +24,7 @@ class ClipVideo(object):
                  clip_info_path=None,
                  save_dir=None):
         if clip_info_str is not None:
-            print(clip_info_str)
             split_part = clip_info_str.split(',')
-            print(split_part)
             video_path, clip_info_list = split_part[0], [split_part[1:]]
         else:
             print('Reading the clip info')
@@ -44,8 +42,7 @@ class ClipVideo(object):
                 save_clip_path = str(save_dir / clip_video_name)
                 self.save_clip_video(cliper, save_clip_path,
                                      clip_start, clip_end)
-        print('The cropped video has been saved '
-             f'under {save_dir}/{Path(video_path).stem}')
+        print(f'The cropped video has been saved under {save_dir}')
 
     @staticmethod
     def read_clip_info(txt_path):
@@ -77,7 +74,7 @@ def main():
     parser.add_argument('--clip_info_path', type=str,
                         default='clip_info.txt',
                         help='Clip Infor')
-    parser.add_argument('--save_dir', type=str, default=Path('video_clip'))
+    parser.add_argument('--save_dir', type=str, default=None)
     args = parser.parse_args()
 
     clip_videoer = ClipVideo()
@@ -102,7 +99,7 @@ if __name__ == '__main__':
     parser.add_argument('--clip_info_path', type=str,
                         default='clip_info.txt',
                         help='Clip Infor')
-    parser.add_argument('--save_dir', type=str, default=Path('video_clip'))
+    parser.add_argument('--save_dir', type=str, default=None)
     args = parser.parse_args()
 
     clip_videoer = ClipVideo()

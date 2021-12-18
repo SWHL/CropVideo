@@ -94,14 +94,5 @@ def main():
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--clip_info_str', type=str, default=None)
-    parser.add_argument('--clip_info_path', type=str,
-                        default='clip_info.txt',
-                        help='Clip Infor')
-    parser.add_argument('--save_dir', type=str, default=None)
-    args = parser.parse_args()
-
-    clip_videoer = ClipVideo()
-    clip_videoer(args.clip_info_path)
+    main()
 

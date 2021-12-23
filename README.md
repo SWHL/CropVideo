@@ -22,7 +22,7 @@ pip install whl/ClipVideo-0.0.1-py3-none-any.whl -i https://pypi.douban.com/simp
     from ClipVideo import ClipVideo
 
     cliper = ClipVideo()
-    cliper('clip_info.txt')
+    cliper(clip_info_path='clip_info.txt')
     ```
 
 #### clip_info.txt组成

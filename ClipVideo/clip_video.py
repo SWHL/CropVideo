@@ -4,11 +4,11 @@
 # @Author: SWHL
 # @Contact: liekkaskono@163.com
 import argparse
-from pathlib import Path
 import sys
+from pathlib import Path
 
-from tqdm import tqdm
 from moviepy import editor
+from tqdm import tqdm
 
 
 def mkdir(path):
@@ -16,9 +16,6 @@ def mkdir(path):
 
 
 class ClipVideo(object):
-    def __init__(self) -> None:
-        pass
-
     def __call__(self,
                  clip_info_str=None,
                  clip_info_path=None,
@@ -81,7 +78,7 @@ def main():
 
     if args.clip_info_str is None:
         if args.clip_info_path is None:
-            raise ValueError(f'clip_info_str or clip_info_path must have')
+            raise ValueError('clip_info_str or clip_info_path must have')
         else:
             if Path(args.clip_info_path).is_file():
                 clip_videoer(clip_info_path=args.clip_info_path)
@@ -95,4 +92,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

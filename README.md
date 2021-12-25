@@ -1,10 +1,7 @@
 ### ClipVideo
-- 该仓库依托于`moviepy`库实现长视频自定义时间点多段切分
+- 该仓库依托于[moviepy](https://github.com/Zulko/moviepy)库实现长视频自定义时间点多段切分
 - 支持whl安装
-
-#### TODO
-- [ ] 剪辑video保存为gif时，很大，甚至比同等剪辑时间的MP4还要大
-- [ ] 发现moviepy不能处理rmvb格式视频
+- 不支持`rmvb`格式视频裁剪
 
 #### 安装
 ```sh
@@ -16,6 +13,9 @@ pip install whl/ClipVideo-0.0.1-py3-none-any.whl -i https://pypi.douban.com/simp
     ```bash
     # clip_info_str: "视频路径,保存裁剪视频名称,开始时间,结束时间"
     ClipVideo --clip_info_str "assets/1.mp4,1_part.mp4,00:00:00,00:00:20"
+
+    # or
+    ClipVideo --clip_info_path "clip_info.txt"
     ```
 - 代码调用
     ```python

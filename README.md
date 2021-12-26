@@ -22,7 +22,10 @@ pip install whl/ClipVideo-0.0.1-py3-none-any.whl -i https://pypi.douban.com/simp
     from ClipVideo import ClipVideo
 
     cliper = ClipVideo()
-    cliper(clip_info_path='clip_info.txt')
+    clipper(clip_info_path='clip_info.txt')
+
+    # or
+    clipper(clip_info_str='assets/1.mp4,1_part.mp4,00:00:00,00:00:20')
     ```
 
 #### clip_info.txt组成
@@ -39,6 +42,6 @@ pip install whl/ClipVideo-0.0.1-py3-none-any.whl -i https://pypi.douban.com/simp
 #### 参数说明
 |参数名称|参数介绍|
 |:---:|:---:|
-|--clip_info_str|按照字符串方式传入，具体字符串类型可以参考上面**命令行调用**部分|
+|--clip_info_str|按照字符串方式传入，具体字符串类型可以参考上面**命令行使用**部分|
 |--clip_info_path|以txt格式传入，可以同时对同一个视频做多次裁剪，txt写法参考上部分|
 |--save_dir|裁剪后的视频保存路径,默认是当前目录下创建`video_clip`目录存储|

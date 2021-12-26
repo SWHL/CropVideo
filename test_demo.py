@@ -4,4 +4,4 @@
 from ClipVideo import ClipVideo
 
 cliper = ClipVideo()
-cliper(clip_info_path='clip_info.txt')
+cliper()

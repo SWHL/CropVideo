@@ -23,9 +23,11 @@ class ClipVideo(object):
         if clip_info_str is not None:
             split_part = clip_info_str.split(',')
             video_path, clip_info_list = split_part[0], [split_part[1:]]
-        else:
+        elif clip_info_path is not None:
             print('Reading the clip info')
             video_path, clip_info_list = self.read_clip_info(clip_info_path)
+        else:
+            raise ValueError('Both clip_info_str and clip_info_path can not be all None.')
 
         if save_dir is None:
             save_dir = Path('video_clip') / Path(video_path).stem
@@ -67,28 +69,50 @@ class ClipVideo(object):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--clip_info_str', type=str, default=None)
-    parser.add_argument('--clip_info_path', type=str,
+    parser.add_argument('-str', '--clip_info_str', type=str,
+                        default=None,
+                        help='Clip information given in string format, which only clip one part at one time.')
+    parser.add_argument('-txt', '--clip_info_path', type=str,
                         default='clip_info.txt',
-                        help='Clip Infor')
+                        help='Clip information given in txt format, which can clip multiple parts at the same time.')
     parser.add_argument('--save_dir', type=str, default=None)
     args = parser.parse_args()
 
     clip_videoer = ClipVideo()
 
-    if args.clip_info_str is None:
-        if args.clip_info_path is None:
-            raise ValueError('clip_info_str or clip_info_path must have')
+    if args.clip_info_path is not None:
+        if Path(args.clip_info_path).is_file():
+            clip_videoer(clip_info_path=args.clip_info_path)
         else:
-            if Path(args.clip_info_path).is_file():
-                clip_videoer(clip_info_path=args.clip_info_path)
-            else:
-                print(f'{args.clip_info_path} is not a file!')
-                sys.exit(2)
-    else:
+            print(f'{args.clip_info_path} is not a file!')
+            sys.exit(2)
+    elif args.clip_info_str is not None:
         clip_videoer(clip_info_str=args.clip_info_str,
                      save_dir=args.save_dir)
-
+    else:
+        raise ValueError('Both clip_info_str and clip_info_path can not be all None.')
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-str', '--clip_info_str', type=str,
+                        default=None,
+                        help='Clip information given in string format, which only clip one part at one time.')
+    parser.add_argument('-txt', '--clip_info_path', type=str,
+                        default='clip_info.txt',
+                        help='Clip information given in txt format, which can clip multiple parts at the same time.')
+    parser.add_argument('--save_dir', type=str, default=None)
+    args = parser.parse_args()
+
+    clip_videoer = ClipVideo()
+
+    if args.clip_info_path is not None:
+        if Path(args.clip_info_path).is_file():
+            clip_videoer(clip_info_path=args.clip_info_path)
+        else:
+            print(f'{args.clip_info_path} is not a file!')
+            sys.exit(2)
+    elif args.clip_info_str is not None:
+        clip_videoer(clip_info_str=args.clip_info_str,
+                     save_dir=args.save_dir)
+    else:
+        raise ValueError('Both clip_info_str and clip_info_path can not be all None')

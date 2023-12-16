@@ -2,10 +2,7 @@ name: Push package to pypi
 
 on:
   push:
-    # branches: [ main ]
-    # paths:
-    #   - 'crop_video/**'
-    tag:
+    tags:
       - v*
 
 jobs:
@@ -29,15 +26,15 @@ jobs:
           python -m pip install --upgrade pip
           python setup.py bdist_wheel ${{ github.event.head_commit.message }}
 
-      - name: Publish distribution 📦 to Test PyPI
-        uses: pypa/gh-action-pypi-publish@v1.5.0
-        with:
-          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
-          repository_url: https://test.pypi.org/legacy/
-          packages_dir:  dist/
-
-      # - name: Publish distribution 📦 to PyPI
+      # - name: Publish distribution 📦 to Test PyPI
       #   uses: pypa/gh-action-pypi-publish@v1.5.0
       #   with:
-      #     password: ${{ secrets.PYPI_API_TOKEN }}
-      #     packages_dir: dist/
+      #     password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+      #     repository_url: https://test.pypi.org/legacy/
+      #     packages_dir:  dist/
+
+      - name: Publish distribution 📦 to PyPI
+        uses: pypa/gh-action-pypi-publish@v1.5.0
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
+          packages_dir: dist/

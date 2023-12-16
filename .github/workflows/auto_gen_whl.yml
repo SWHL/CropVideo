@@ -5,8 +5,8 @@ on:
     # branches: [ main ]
     # paths:
     #   - 'crop_video/**'
-    tag:
-      - v*
+  tag:
+    - v*
 
 jobs:
   GenerateWHL_PushPyPi:
@@ -24,7 +24,7 @@ jobs:
       - name: Run setup.py
         run: |
           pip install -r requirements.txt
-          pip install wheel
+          pip install wheel get_pypi_latest_version
 
           python -m pip install --upgrade pip
           python setup.py bdist_wheel ${{ github.event.head_commit.message }}

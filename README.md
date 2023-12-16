@@ -1,4 +1,20 @@
-### Cut Video
+<div align="center">
+    <div align="center">
+    <h1><b><i>Crop ✄ Video 📀</i></b></h1>
+    </div>
+
+<a href=""><img src="https://img.shields.io/badge/Python->=3.6,<3.12-aff.svg"></a>
+<a href=""><img src="https://img.shields.io/badge/OS-Linux%2C%20Win%2C%20Mac-pink.svg"></a>
+<a href="https://pypi.org/project/crop-video/"><img alt="PyPI" src="https://img.shields.io/pypi/v/crop-video"></a>
+<a href="https://pepy.tech/project/crop-video"><img src="https://static.pepy.tech/personalized-badge/crop-video?period=total&units=abbreviation&left_color=grey&right_color=blue&left_text=Downloads"></a>
+<a href="https://semver.org/"><img alt="SemVer2.0" src="https://img.shields.io/badge/SemVer-2.0-brightgreen"></a>
+<a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
+<a href="https://choosealicense.com/licenses/mit/"><img alt="GitHub" src="https://github.com/SWHL/CutVideo/blob/3e5f39a58eb7c292a172ca4c3683998efa071495/LICENSE"></a>
+
+</div>
+
+
+### 简介
 该仓库依托于[moviepy](https://github.com/Zulko/moviepy)库实现长视频自定义时间点多段切分
 
 ⚠️注意：不支持`rmvb`格式视频裁剪

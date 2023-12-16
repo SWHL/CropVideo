@@ -1,16 +1,11 @@
-### Cut Video
-该仓库依托于[moviepy](https://github.com/Zulko/moviepy)库实现长视频自定义时间点多段切分
-
-⚠️注意：不支持`rmvb`格式视频裁剪
-
-#### 安装
+#### Installation
 ```bash
 pip install crop_video
 ```
 
 #### Use by CLI
 ```bash
-# 视频路径 开始时间 结束时间 保存裁剪视频路径
+# video_path start_time end_time save_path
 $ crop_video 1.mp4 00:00:00 00:00:20 result.mp4
 ```
 

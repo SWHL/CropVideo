@@ -8,13 +8,13 @@
 pip install crop_video
 ```
 
-#### Use by CLI
+#### 命令行使用
 ```bash
 # 视频路径 开始时间 结束时间 保存裁剪视频路径
 $ crop_video 1.mp4 00:00:00 00:00:20 result.mp4
 ```
 
-#### Use by python
+#### Python脚本使用
 ```python
 from crop_video import CropVideo
 

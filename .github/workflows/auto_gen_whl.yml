@@ -5,8 +5,8 @@ on:
     # branches: [ main ]
     # paths:
     #   - 'crop_video/**'
-  tag:
-    - v*
+    tag:
+      - v*
 
 jobs:
   GenerateWHL_PushPyPi:

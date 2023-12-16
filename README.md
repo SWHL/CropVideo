@@ -9,7 +9,6 @@
 <a href="https://pepy.tech/project/crop-video"><img src="https://static.pepy.tech/personalized-badge/crop-video?period=total&units=abbreviation&left_color=grey&right_color=blue&left_text=Downloads"></a>
 <a href="https://semver.org/"><img alt="SemVer2.0" src="https://img.shields.io/badge/SemVer-2.0-brightgreen"></a>
 <a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
-<a href="https://choosealicense.com/licenses/mit/"><img alt="GitHub" src="https://github.com/SWHL/CutVideo/blob/3e5f39a58eb7c292a172ca4c3683998efa071495/LICENSE"></a>
 
 </div>
 
